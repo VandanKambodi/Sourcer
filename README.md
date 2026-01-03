@@ -18,7 +18,6 @@ Sourcer enables organizations to:
 
 ## Features
 
-
 **Authentication & User Management**
 - Secure **email & password authentication**.
 - **Role-based access control** (Admin / HR Officer / Employee).
@@ -35,6 +34,38 @@ Sourcer enables organizations to:
   - View personal and job-related details.
   - Edit limited profile information (address, phone, profile picture).
 
+**Attendance Management**
+- Daily and weekly attendance tracking.
+- Employee check-in / check-out functionality.
+- Employees can view only their own attendance.
+- Attendance status:
+  - Present
+  - Absent
+  - Leave
+- Admin/HR can view attendance of all employees.
+
+**Leave & Time-Off Management**
+- Employees can:
+  - Apply for leave (Paid, Sick, Unpaid).
+  - Select date ranges and add remarks.
+  - Track leave status (Pending, Approved, Rejected).
+- Admin/HR can:
+  - View all leave requests.
+  - Approve or reject requests with comments.
+
+**Payroll & Salary Management**
+- Employees:
+  - Read-only access to payroll and salary details.
+- Admin/HR:
+  - Create and update salary structures.
+  - Manage payroll data securely.
+
+## UX, Security & Performance
+- Server-side validation using TypeScript.
+- Clean, responsive UI with Tailwind CSS.
+- Protected APIs and dashboards.
+- Clear error handling and feedback.
+- Optimized database queries using Prisma ORM.
 
 ##  Installation
 ### Clone the Repository
@@ -74,6 +105,20 @@ Create a file named `.env` in the root directory:
 - **Security** bcrypt, middleware-based route protection
 
 
+## Project Structure
+```bash
+
+
+```
+
+
+## Data Handling
+- All data stored securely in PostgreSQL (NeonDB).
+- Relational structure managed using Prisma ORM.
+- Attendance, leave, and payroll data linked to employees.
+- Role-based data access enforced at API and UI levels.
+
+
 ##  Contributing
 - Contributions are welcome! To contribute:
 
@@ -82,4 +127,3 @@ Create a file named `.env` in the root directory:
 3. Commit changes (`git commit -m 'Add feature'`)
 4. Push to your branch (`git push origin feature-name`)
 5. Open a Pull Request
->>>>>>> origin/main
