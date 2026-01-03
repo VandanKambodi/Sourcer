@@ -17,7 +17,7 @@ import * as z from "zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Eye, EyeOff, Loader2, Mail } from "lucide-react";
+import { Eye, EyeOff, Loader2, Mail, Lock } from "lucide-react";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -82,6 +82,14 @@ export function LoginForm() {
     });
   };
 
+  // --- STYLES (Matching RegisterForm) ---
+  const gradientText = "bg-gradient-to-r from-[#CFCBC8] to-[#9E9B98] bg-clip-text text-transparent font-bold";
+  const borderColor = "border-[#CFCBC8]/30";
+  const focusRing = "focus-visible:ring-[#CFCBC8] focus-visible:border-[#CFCBC8]";
+  const inputBg = "bg-zinc-900/50"; 
+  const inputStyles = `${inputBg} ${borderColor} text-[#CFCBC8] placeholder:text-[#CFCBC8]/40 ${focusRing} transition-all duration-300`;
+  const iconColor = "text-[#CFCBC8]/50";
+
   return (
     <CardWrapper
       headerLabel="Welcome back"
@@ -91,42 +99,53 @@ export function LoginForm() {
       isDisabled={isPending}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* Added -mb-6 to reduce space between button and footer link */}
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 -mb-6">
+          
+          {/* Email Field */}
           <FormField
             control={form.control}
             name="email"
             disabled={isPending}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className={gradientText}>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="xyz@gmail.com"
-                    {...field}
-                    disabled={isPending}
-                  />
+                  <div className="relative group">
+                    <Mail className={`absolute left-3 top-2.5 h-4 w-4 ${iconColor} group-hover:text-[#CFCBC8] transition-colors`} />
+                    <Input
+                      placeholder="xyz@gmail.com"
+                      {...field}
+                      disabled={isPending}
+                      className={`${inputStyles} pl-10`}
+                    />
+                  </div>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-400" />
               </FormItem>
             )}
           />
+
+          {/* Password Field */}
           <FormField
             control={form.control}
             name="password"
             disabled={isPending}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className={gradientText}>Password</FormLabel>
                 <FormControl>
-                  <div className="relative">
+                  <div className="relative group">
+                    <Lock className={`absolute left-3 top-2.5 h-4 w-4 ${iconColor} group-hover:text-[#CFCBC8] transition-colors`} />
                     <Input
-                      placeholder="Enter you Password"
+                      placeholder="Enter your Password"
                       {...field}
                       disabled={isPending}
                       type={isPasswordVisible ? "text" : "password"}
+                      className={`${inputStyles} pl-10 pr-10`}
                     />
                     <button
-                      className="absolute bottom-0 right-0 h-10 px-3 pt-1 text-center text-gray-500"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#CFCBC8]/50 hover:text-[#CFCBC8] transition-colors p-1"
                       onClick={() => {
                         setIsPasswordVisible(!isPasswordVisible);
                       }}
@@ -140,10 +159,12 @@ export function LoginForm() {
                     </button>
                   </div>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-400" />
+                
+                {/* Forgot Password Link - Styled to match theme */}
                 <Button
                   disabled={isPending}
-                  className="mt-[1px] h-0 px-0 pt-2 font-normal text-[13px] flex justify-start"
+                  className="mt-[1px] h-0 px-0 pt-2 font-normal text-[13px] flex justify-start text-[#CFCBC8]/80 hover:text-[#CFCBC8]"
                   variant="link"
                   size={"sm"}
                   asChild
@@ -155,15 +176,20 @@ export function LoginForm() {
               </FormItem>
             )}
           />
+
+          {/* Submit Button - Gradient Style */}
           <Button
             disabled={isPending}
             type="submit"
-            className="w-full space-y-0 py-0 mt-2"
+            className="w-full py-6 text-base font-bold shadow-lg mt-2 text-black
+            bg-gradient-to-r from-[#CFCBC8] via-[#E6E2DF] to-[#9E9B98]
+            hover:bg-gradient-to-br hover:from-[#E6E2DF] hover:via-[#CFCBC8] hover:to-[#B0ADA9]
+            transition-all duration-500 bg-[length:200%_auto] hover:bg-right"
           >
             {isPending ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
             ) : (
-              <Mail className="mr-2 h-4 w-4" />
+              <Mail className="mr-2 h-5 w-5" />
             )}
             Login with Mail
           </Button>

@@ -31,7 +31,7 @@ export const CardWrapper = ({
 }: CardWrapperProps) => {
   return (
     <section className="flex h-screen items-center justify-center my-8 mx-4">
-      <Card className="w-[380px] shadow-md">
+      <Card className="w-[380px] shadow-md bg-zinc-900/50">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">{headerLabel}</CardTitle>
           <CardDescription>{headerdescription}</CardDescription>

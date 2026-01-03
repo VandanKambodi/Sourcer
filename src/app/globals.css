@@ -1,6 +1,21 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@layer base {
+  html, body {
+    /* Option A: Built-in Crosshair (Fits your theme well) */
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="%23FFFFFF" stroke-linecap="round" stroke-width="2" d="m3 3 18 18M21 3 3 21"></path></svg>')  12 12, crosshair; 
+    background-color: #000000; /* Forces black immediately */
+    color: #CFCBC8;
+  }
+
+  /* Option B: Interactive elements show a pointer */
+  a, button, [role="button"] {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="48" viewBox="0 0 24 24"><path fill="%23FFF" stroke="%23000" stroke-width="1" stroke-linejoin="round" d="M10 11V8.99c0-.88.59-1.64 1.44-1.86h.05A1.99 1.99 0 0 1 14 9.05V12v-2c0-.88.6-1.65 1.46-1.87h.05A1.98 1.98 0 0 1 18 10.06V13v-1.94a2 2 0 0 1 1.51-1.94h0A2 2 0 0 1 22 11.06V14c0 .6-.08 1.27-.21 1.97a7.96 7.96 0 0 1-7.55 6.48 54.98 54.98 0 0 1-4.48 0 7.96 7.96 0 0 1-7.55-6.48C2.08 15.27 2 14.59 2 14v-1.49c0-1.11.9-2.01 2.01-2.01h0a2 2 0 0 1 2.01 2.03l-.01.97v-10c0-1.1.9-2 2-2h0a2 2 0 0 1 2 2V11Z"></path></svg>') 0 0, pointer;
+
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -46,14 +61,20 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/* LIGHT MODE */
 :root {
   --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.147 0.004 49.25);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.147 0.004 49.25);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.147 0.004 49.25);
+  
+  /* Background is #CFCBC8, Text is Black */
+  --background: #CFCBC8;
+  --foreground: #000000;
+  
+  /* Matches Background */
+  --card: #CFCBC8;
+  --card-foreground: #000000;
+  --popover: #CFCBC8;
+  --popover-foreground: #000000;
+
   --primary: oklch(0.216 0.006 56.043);
   --primary-foreground: oklch(0.985 0.001 106.423);
   --secondary: oklch(0.97 0.001 106.424);
@@ -81,13 +102,18 @@
   --sidebar-ring: oklch(0.709 0.01 56.259);
 }
 
+/* DARK MODE */
 .dark {
-  --background: oklch(0.147 0.004 49.25);
-  --foreground: oklch(0.985 0.001 106.423);
-  --card: oklch(0.216 0.006 56.043);
-  --card-foreground: oklch(0.985 0.001 106.423);
-  --popover: oklch(0.216 0.006 56.043);
-  --popover-foreground: oklch(0.985 0.001 106.423);
+  /* Background is Black, Text is #CFCBC8 */
+  --background: #000000;
+  --foreground: #CFCBC8;
+
+  /* Matches Background */
+  --card: #000000;
+  --card-foreground: #CFCBC8;
+  --popover: #000000;
+  --popover-foreground: #CFCBC8;
+
   --primary: oklch(92.559% 0.00446 135.786);
   --primary-foreground: oklch(0.216 0.006 56.043);
   --secondary: oklch(0.268 0.007 34.298);
