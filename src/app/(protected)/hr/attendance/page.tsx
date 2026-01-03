@@ -93,6 +93,8 @@ export default function HRAttendancePage() {
     }
   };
 
+  
+
   if (loading) {
     return <AttendanceSkeleton />;
   }

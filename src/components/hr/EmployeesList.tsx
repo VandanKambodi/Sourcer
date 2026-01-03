@@ -43,7 +43,7 @@ interface Employee {
   phoneNumber: string | null;
   companyName: string | null;
   isPasswordChanged: boolean;
-  attendanceStatus: "PRESENT" | "ON_LEAVE" | "ABSENT";
+  status: "PRESENT" | "ON_LEAVE" | "ABSENT";
   createdAt: Date;
 }
 
@@ -117,6 +117,7 @@ function EmployeeListContent() {
       if (result.error) {
         setError(result.error);
       } else if (result.employees) {
+        console.log(result.employees);
         setEmployees(result.employees as Employee[]);
         setFilteredEmployees(result.employees as Employee[]);
       }

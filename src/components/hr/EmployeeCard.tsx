@@ -22,7 +22,7 @@ interface EmployeeCardProps {
   phoneNumber: string | null;
   companyName: string | null;
   isPasswordChanged: boolean;
-  attendanceStatus: "PRESENT" | "ON_LEAVE" | "ABSENT";
+  status: "PRESENT" | "ON_LEAVE" | "ABSENT";
   createdAt: Date;
 }
 
@@ -66,8 +66,10 @@ export function EmployeeCard({ employee }: { employee: EmployeeCardProps }) {
     }
   };
 
-  const statusInfo = getStatusInfo(employee.attendanceStatus);
+  const statusInfo = getStatusInfo(employee.status);
   const StatusIcon = statusInfo.icon;
+
+  console.log(employee);
 
   return (
     <Card className="hover:shadow-lg transition-all duration-200 overflow-hidden">
@@ -150,9 +152,6 @@ export function EmployeeCard({ employee }: { employee: EmployeeCardProps }) {
               View Profile
             </Button>
           </Link>
-          <Button variant="ghost" size="sm" className="text-slate-400">
-            ⋮
-          </Button>
         </div>
       </div>
     </Card>

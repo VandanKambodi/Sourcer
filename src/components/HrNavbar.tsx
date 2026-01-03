@@ -17,7 +17,12 @@ import { Button } from "@/components/ui/button";
 import { useCurrentUserClient } from "@/hook/use-current-user";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { getTodayAttendanceStatus } from "@/actions/employee/attendance";
+import {
+  checkInAttendance,
+  checkOutAttendance,
+  getTodayAttendanceStatus,
+} from "@/actions/employee/attendance";
+import { toast } from "sonner";
 
 export function HrNavbar() {
   const pathname = usePathname();
@@ -26,36 +31,58 @@ export function HrNavbar() {
   const [isCheckedIn, setIsCheckedIn] = React.useState(false);
   const [checkInTime, setCheckInTime] = React.useState<string | null>(null);
   const [loadingAttendance, setLoadingAttendance] = React.useState(true);
+  const [checking, setChecking] = React.useState(false);
+
   if (status === "loading") return null;
 
-  const handleToggleAttendance = () => {
-    if (!isCheckedIn) {
-      setCheckInTime(
-        new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      );
-    } else {
-      setCheckInTime(null);
-    }
-    setIsCheckedIn(!isCheckedIn);
-  };
+  // // Fetch today's attendance status
+  // React.useEffect(() => {
+  //   if (!user) return;
 
-  React.useEffect(() => {
-    if (!user) return;
+  //   setLoadingAttendance(true);
+  //   getTodayAttendanceStatus()
+  //     .then((attendance) => {
+  //       setIsCheckedIn(attendance?.checkInTime !== null );
+  //       setCheckInTime(attendance.checkInTime ?? null);
+  //     })
+  //     .finally(() => setLoadingAttendance(false));
+  // }, [user]);
 
-    setLoadingAttendance(true);
-    getTodayAttendanceStatus()
-      .then((attendance) => {
-        setIsCheckedIn(attendance.status === "PRESENT");
-        setCheckInTime(attendance.checkInTime ?? null);
-      })
-      .finally(() => setLoadingAttendance(false));
-  }, [user]);
+  // // Check in
+  // const handleCheckIn = async () => {
+  //   try {
+  //     setChecking(true);
+  //     await checkInAttendance();
+  //     const now = new Date().toLocaleTimeString([], {
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     });
+  //     setIsCheckedIn(true);
+  //     setCheckInTime(now);
+  //     toast.success("Checked in successfully");
+  //   } catch (error) {
+  //     toast.error("Failed to check in");
+  //   } finally {
+  //     setChecking(false);
+  //   }
+  // };
+
+  // // Check out
+  // const handleCheckOut = async () => {
+  //   try {
+  //     setChecking(true);
+  //     await checkOutAttendance();
+  //     setIsCheckedIn(false);
+  //     setCheckInTime(null);
+  //     toast.success("Checked out successfully");
+  //   } catch (error) {
+  //     toast.error("Failed to check out");
+  //   } finally {
+  //     setChecking(false);
+  //   }
+  // };
 
   const navLinks = [
-    // { name: "Dashboard", href: "/hr/dashboard" },
     { name: "Employees", href: "/hr/employees" },
     { name: "Attendance", href: "/hr/attendance" },
     { name: "Time Off", href: "/hr/time-off" },
@@ -72,8 +99,8 @@ export function HrNavbar() {
             <Image
               src={user.image}
               alt={user?.companyName || "Logo"}
-              width={30} // adjust as needed
-              height={30} // adjust as needed
+              width={30}
+              height={30}
               className="rounded"
             />
           </div>
@@ -99,9 +126,9 @@ export function HrNavbar() {
 
         {/* Right */}
         <div className="flex items-center gap-4">
-          {/* Check in / out */}
+          {/* Check In / Check Out */}
           <div className="flex items-center gap-3 pr-4 border-r">
-            <div className="flex flex-col items-end mr-1">
+            {/* <div className="flex flex-col items-end mr-2">
               {isCheckedIn && (
                 <span className="text-[10px] text-muted-foreground uppercase font-semibold">
                   Since {checkInTime}
@@ -118,7 +145,18 @@ export function HrNavbar() {
                   {isCheckedIn ? "Active" : "Offline"}
                 </span>
               </div>
-            </div>
+            </div> */}
+
+            {/* <Button
+              size="sm"
+              variant={isCheckedIn ? "outline" : "default"}
+              className="h-8 gap-2"
+              onClick={isCheckedIn ? handleCheckOut : handleCheckIn}
+              disabled={checking}
+            >
+              {isCheckedIn ? "Check Out" : "Check In"}
+              <ArrowRight className="size-3" />
+            </Button> */}
           </div>
 
           {/* Profile */}
