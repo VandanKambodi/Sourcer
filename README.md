@@ -16,6 +16,12 @@ Sourcer enables organizations to:
 - **Ensure data security** through protected routes and server-side validation.
 - **Scale easily** using modern backend architecture and cloud-hosted PostgreSQL.
 
+<img width="1898" height="1026" alt="image" src="https://github.com/user-attachments/assets/7aa85d1e-a8d5-4e81-b440-d203c0ccf714" />
+<img width="1898" height="1023" alt="image" src="https://github.com/user-attachments/assets/5947d9e7-cfb5-4218-8c9e-280ece85ebb9" />
+<img width="1896" height="1024" alt="image" src="https://github.com/user-attachments/assets/c1e4a267-a0ef-40a2-b1ad-ac0c04e59d41" />
+<img width="1898" height="1022" alt="image" src="https://github.com/user-attachments/assets/fd1afd84-475f-4509-9b0b-b3250d4a7038" />
+
+
 ## Features
 
 **Authentication & User Management**
