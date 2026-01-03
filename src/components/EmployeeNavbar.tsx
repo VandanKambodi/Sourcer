@@ -17,8 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useCurrentUserClient } from "@/hook/use-current-user";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import {getTodayAttendanceStatus} from "@/actions/employee/attendance"
-
+import { getTodayAttendanceStatus } from "@/actions/employee/attendance";
 
 export function EmployeeNavbar() {
   const pathname = usePathname();
@@ -28,7 +27,6 @@ export function EmployeeNavbar() {
   const [isCheckedIn, setIsCheckedIn] = React.useState(false);
   const [checkInTime, setCheckInTime] = React.useState<string | null>(null);
   const [loadingAttendance, setLoadingAttendance] = React.useState(true);
-
 
   if (status === "loading") return null;
 
@@ -44,21 +42,7 @@ export function EmployeeNavbar() {
       setCheckInTime(null);
     }
     setIsCheckedIn(!isCheckedIn);
-
-    
   };
-
-  React.useEffect(() => {
-      if (!user) return;
-  
-      setLoadingAttendance(true);
-      getTodayAttendanceStatus()
-        .then((attendance) => {
-          setIsCheckedIn(attendance.status === "PRESENT");
-          setCheckInTime(attendance.checkInTime ?? null);
-        })
-        .finally(() => setLoadingAttendance(false));
-    }, [user]);
 
   const navLinks = [
     // {
@@ -133,16 +117,6 @@ export function EmployeeNavbar() {
                 </span>
               </div>
             </div>
-
-            <Button
-              size="sm"
-              variant={isCheckedIn ? "outline" : "default"}
-              className="h-8 gap-2"
-              onClick={handleToggleAttendance}
-            >
-              {isCheckedIn ? "Check Out" : "Check In"}
-              <ArrowRight className="size-3" />
-            </Button>
           </div>
 
           {/* Profile */}
