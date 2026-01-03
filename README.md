@@ -107,7 +107,49 @@ Create a file named `.env` in the root directory:
 
 ## Project Structure
 ```bash
-
+.
+├── prisma/                     # Database schema and migrations
+│   ├── migrations/             # SQL migration files
+│   └── schema.prisma           # Prisma schema definition
+├── public/                     # Static assets (images, icons)
+├── src/
+│   ├── actions/                # Server Actions for backend logic
+│   │   ├── auth/               # Authentication actions (login, signup)
+│   │   ├── employee/           # Employee-specific actions
+│   │   ├── hr/                 # HR-specific actions
+│   │   ├── profile/            # Profile management actions
+│   │   └── time-off/           # Time-off request handling
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── (protected)/        # Authenticated routes group
+│   │   │   ├── employee/       # Employee dashboard & pages
+│   │   │   ├── hr/             # HR dashboard & pages
+│   │   │   └── profile/        # User profile page
+│   │   ├── api/                # API Routes (e.g., auth, upload)
+│   │   ├── auth/               # Auth pages (login, error, etc.)
+│   │   ├── globals.css         # Global styles
+│   │   ├── layout.tsx          # Root layout
+│   │   └── page.tsx            # Landing page
+│   ├── components/             # React components
+│   │   ├── auth/               # Auth forms and cards
+│   │   ├── employee/           # Employee dashboard components
+│   │   ├── hr/                 # HR dashboard components
+│   │   ├── time-off/           # Time-off modals and forms
+│   │   ├── ui/                 # Reusable UI components (buttons, inputs)
+│   │   ├── EmployeeNavbar.tsx  # Navigation for employees
+│   │   └── HrNavbar.tsx        # Navigation for HR
+│   ├── data/                   # Data access layer (users, tokens)
+│   ├── hook/                   # Custom React hooks (e.g., useCurrentUser)
+│   ├── lib/                    # Utilities and libraries (DB, email)
+│   ├── middleware.ts           # Middleware for route protection
+│   └── routes.ts               # Route path definitions
+├── .gitignore
+├── components.json             # shadcn/ui configuration
+├── eslint.config.mjs           # ESLint configuration
+├── next.config.ts              # Next.js configuration
+├── package.json                # Project dependencies and scripts
+├── postcss.config.mjs          # PostCSS configuration
+├── tailwind.config.ts          # Tailwind CSS configuration
+└── tsconfig.json               # TypeScript configuration
 
 ```
 
